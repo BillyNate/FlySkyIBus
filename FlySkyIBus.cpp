@@ -26,16 +26,20 @@ void FlySkyIBus::begin(Stream& stream)
 
 void FlySkyIBus::loop(void)
 {
+  uint8_t i;
+  uint32_t now;
+  uint8_t v;
+
   while (stream->available() > 0)
   {
-    uint32_t now = millis();
+    now = millis();
     if (now - last >= PROTOCOL_TIMEGAP)
     {
       state = GET_LENGTH;
     }
     last = now;
     
-    uint8_t v = stream->read();
+    v = stream->read();
     switch (state)
     {
       case GET_LENGTH:
@@ -75,7 +79,7 @@ void FlySkyIBus::loop(void)
           {
             case PROTOCOL_COMMAND40:
               // Valid - extract channel data
-              for (uint8_t i = 1; i < PROTOCOL_CHANNELS * 2 + 1; i += 2)
+              for (i = 1; i < PROTOCOL_CHANNELS * 2 + 1; i += 2)
               {
                 channel[i / 2] = buffer[i] | (buffer[i + 1] << 8);
               }
