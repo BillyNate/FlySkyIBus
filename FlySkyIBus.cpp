@@ -7,9 +7,9 @@
 
 FlySkyIBus IBus;
 
-void FlySkyIBus::begin(HardwareSerial& serial)
+void FlySkyIBus::begin(HardwareSerial& serial, unsigned long baud, uint32_t config, int8_t rxPin, int8_t txPin, bool invert)
 {
-  serial.begin(115200);
+  serial.begin(baud, config, rxPin, txPin, invert);
   begin((Stream&)serial);
 }
 

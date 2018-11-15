@@ -1,6 +1,6 @@
 /*
- * Test FlySky IBus interface on an Arduino Mega.
- *  Connect FS-iA6B receiver to Serial1.
+ * Test FlySky IBus interface on an ESP32
+ *  Connect FS-iA6B receiver i-bus wire to GPIO16
  */
  
 #include "FlySkyIBus.h"
@@ -8,7 +8,7 @@
 void setup() 
 {
   Serial.begin(115200);
-  IBus.begin(Serial1);
+  IBus.begin(Serial2, 115200, SERIAL_8N1, GPIO_NUM_16);
 }
 
 void loop() 

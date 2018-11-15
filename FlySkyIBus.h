@@ -10,7 +10,7 @@ class Stream;
 class FlySkyIBus
 {
 public:
-  void begin(HardwareSerial& serial);
+  void begin(HardwareSerial& serial, unsigned long baud=115200, uint32_t config=SERIAL_8N1, int8_t rxPin=-1, int8_t txPin=-1, bool invert=false);
   void begin(Stream& stream);
   void loop(void);
   uint16_t readChannel(uint8_t channelNr);
