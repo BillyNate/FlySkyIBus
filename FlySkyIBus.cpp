@@ -101,16 +101,13 @@ void FlySkyIBus::loop(void)
   }
 }
 
-uint16_t FlySkyIBus::readChannel(uint8_t channelNr)
+void FlySkyIBus::getChannels(uint16_t *channels, size_t length)
 {
-  if (channelNr < PROTOCOL_CHANNELS)
+  if(length / sizeof(uint16_t) > PROTOCOL_CHANNELS)
   {
-    return channel[channelNr];
+    return;
   }
-  else
-  {
-    return 0;
-  }
+  memcpy(channels, channel, length);
 }
 
 long FlySkyIBus::millisSinceUpdate()
